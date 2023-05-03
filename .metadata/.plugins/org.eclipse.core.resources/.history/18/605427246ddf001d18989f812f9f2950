@@ -1,0 +1,10 @@
+/**
+ * 
+ */
+/**
+ * @author Usuario
+ *
+ */
+module StockTools {
+	requires java.sql;
+}

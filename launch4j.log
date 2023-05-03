@@ -1,0 +1,20 @@
+
+
+Version:	3.50
+CmdLine:	C:\Users\Usuario\Desktop\Proyectos\Stock tools\Stock.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	C:\Users\Usuario\Desktop\Proyectos\Stock tools\.
+Requires JDK:	No
+Requires 64-Bit: No
+Java min ver:	
+Java max ver:	
+Substitute:	JAVA_HOME = C:\Program Files\Java\jdk-17
+Substitute:	PATH = C:\Python311\Scripts\;C:\Python311\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\kotlinc\bin;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Desarrollo\apache-maven-3.9.1\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\Usuario\AppData\Local\Microsoft\WindowsApps;C:\Users\Usuario\AppData\Local\Programs\Espanso;C:\Users\Usuario\AppData\Local\GitHubDesktop\bin;C:\ProgramData\Usuario\GitHubDesktop\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2022.3.2\bin;;C:\Users\Usuario\AppData\Roaming\npm;C:\Desarrollo;C:\Desarrollo\apache-maven-3.9.1\bin;C:\Users\Usuario\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Java\jdk-17\bin
+JRE paths:	C:\Program Files\Java\jdk-17;C:\Python311\Scripts\;C:\Python311\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\kotlinc\bin;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Desarrollo\apache-maven-3.9.1\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\Usuario\AppData\Local\Microsoft\WindowsApps;C:\Users\Usuario\AppData\Local\Programs\Espanso;C:\Users\Usuario\AppData\Local\GitHubDesktop\bin;C:\ProgramData\Usuario\GitHubDesktop\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2022.3.2\bin;;C:\Users\Usuario\AppData\Roaming\npm;C:\Desarrollo;C:\Desarrollo\apache-maven-3.9.1\bin;C:\Users\Usuario\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Java\jdk-17\bin
+Check launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe (OK)
+Version string: 1.017.000_006 / 64-Bit (OK)
+Launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe
+Launcher args:	-jar "C:\Users\Usuario\Desktop\Proyectos\Stock tools\Stock.exe"
+Args length:	63/32768 chars
+Exit code:	0

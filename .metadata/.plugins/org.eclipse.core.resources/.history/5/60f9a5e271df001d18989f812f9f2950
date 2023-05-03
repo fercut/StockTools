@@ -1,0 +1,29 @@
+package Modelo;
+
+import java.io.*;
+import java.sql.*;
+import javax.swing.*;
+
+public class Creacion_BBDD {
+	
+	private Connection conexion;
+	private Statement stmt;
+	private ResultSet rs;
+	
+	public void crearBBDD() {
+		
+		//Conectamos con mysql local
+		
+	    try {
+	    	String url = "jdbc:mysql://localhost:3306/";
+		    String usuario = "root";
+		    String contraseña = "";
+			conexion = DriverManager.getConnection(url, usuario, contraseña);
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog("Ha ocurrido un error al conectar con la base de datos");
+			e.printStackTrace();
+		}
+		
+	}
+
+}

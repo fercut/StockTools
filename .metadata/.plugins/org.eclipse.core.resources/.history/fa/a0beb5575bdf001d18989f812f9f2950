@@ -1,0 +1,9 @@
+package Clases;
+
+public class Escalera extends Herramineta {
+	
+	private String material;
+	private int peldanios;
+	private 
+
+}

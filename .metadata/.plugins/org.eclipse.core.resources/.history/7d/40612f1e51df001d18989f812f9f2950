@@ -1,0 +1,9 @@
+package Clases;
+
+public class Herramineta {
+
+	private String Nombre;
+	private boolean Electrica;
+	private String Marca;
+	private double Peso; 
+}
