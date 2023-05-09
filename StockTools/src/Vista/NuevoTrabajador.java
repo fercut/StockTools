@@ -3,19 +3,40 @@ package Vista;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-
 import javax.swing.*;
+import Modelo.*;
+import Controlador.*;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.ActionEvent;
 
 public class NuevoTrabajador extends JFrame {
-
+	
+	private JCheckBox checkOficial = new JCheckBox("");
+	private JCheckBox checkTecnic = new JCheckBox("");
 	private JTextField inName;
 	private JTextField inLastName;
+
+	public Trabajador crearTrabajadorVista(){
+		
+		String nombre = inName.getText();
+		String apellido = inLastName.getText();
+		String categoria;
+		if(checkOficial.isSelected()) {
+			categoria= "Oficial";
+		}else {
+			categoria= "Tecnico";
+		}
+		Trabajador trabajador = new Trabajador(nombre, apellido, categoria);
+		return trabajador;
+	}
 	
 	public NuevoTrabajador() {
 		
+		//Propiedades de la ventana
 		setVisible(true);
 		setResizable(false);
-		
 		Toolkit miPantalla = Toolkit.getDefaultToolkit();
 		Dimension tamanoPantalla = miPantalla.getScreenSize(); 
 		int alturaPantalla = tamanoPantalla.height;
@@ -25,7 +46,7 @@ public class NuevoTrabajador extends JFrame {
 		setDefaultCloseOperation(2);
 		
 		//Icono y nombre
-		setTitle("StockTools / Nueva herramienta");
+		setTitle("StockTools / Nuevo trabajador");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("./imagenes/icono.png"));
 		getContentPane().setLayout(null);
 		
@@ -56,10 +77,10 @@ public class NuevoTrabajador extends JFrame {
 		lastName.setHorizontalAlignment(SwingConstants.RIGHT);
 		lastName.setForeground(Color.WHITE);
 		lastName.setFont(new Font("Arial", Font.BOLD, 12));
-		lastName.setBounds(227, 180, 103, 20);
+		lastName.setBounds(227, 183, 103, 20);
 		panel.add(lastName);
 		
-		JLabel category = new JLabel("Primer Apellido");
+		JLabel category = new JLabel("Categoria");
 		category.setHorizontalAlignment(SwingConstants.RIGHT);
 		category.setForeground(Color.WHITE);
 		category.setFont(new Font("Arial", Font.BOLD, 12));
@@ -73,14 +94,14 @@ public class NuevoTrabajador extends JFrame {
 		
 		inLastName = new JTextField();
 		inLastName.setColumns(10);
-		inLastName.setBounds(390, 180, 252, 20);
+		inLastName.setBounds(390, 183, 252, 20);
 		panel.add(inLastName);
 		
-		JCheckBox checkOficial = new JCheckBox("");
+		
 		checkOficial.setBounds(390, 244, 21, 23);
 		panel.add(checkOficial);
 		
-		JCheckBox checkTecnic = new JCheckBox("");
+		
 		checkTecnic.setBounds(518, 244, 21, 23);
 		panel.add(checkTecnic);
 		
@@ -111,6 +132,7 @@ public class NuevoTrabajador extends JFrame {
 						}
 					}
 				});
+			
 			checkTecnic.addItemListener(new ItemListener(){
 					public void itemStateChanged(ItemEvent e) {
 						if(checkTecnic.isSelected()) {
@@ -118,6 +140,33 @@ public class NuevoTrabajador extends JFrame {
 						}
 					}
 				});
-		
+			
+			inName.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					if(inName.getText().length()>20) {
+						inName.setText("");
+						JOptionPane.showMessageDialog(null,"El nombre del trabajador solo puede tener 20 caracteres");
+					}
+				}
+			});
+			inLastName.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					if(inLastName.getText().length()>20) {
+						inLastName.setText("");
+						JOptionPane.showMessageDialog(null,"El apellido del trabajador solo puede tener 20 caracteres");
+					}
+				}
+			});
+			
+			aceptar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Trabajador trabajador = crearTrabajadorVista();
+					NuevoTrabajadorControlador nuevo = new NuevoTrabajadorControlador();
+					nuevo.nuevoTrabajadorControlador(trabajador);
+					dispose();
+				}
+			});
    }
 }

@@ -1,6 +1,6 @@
 AMOLADORA
-SI
 MAKITA
-1.8
-720
-DISCOS DE 115mm
+SI
+800 W
+1.8 kg
+Discos de 115mm

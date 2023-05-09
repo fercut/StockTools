@@ -10,6 +10,7 @@ public class Herramienta {
 	private int potencia;
 	private String anotaciones;
 	private String rutaImagen;
+	private int id_trabajador;
 	
 	public Herramienta( String nombre, String marca, String electrica, int potencia, double peso, String annotation, String rutaImagen) {
 		Nombre = nombre;
@@ -20,7 +21,59 @@ public class Herramienta {
 		this.anotaciones = annotation;
 		this.rutaImagen = rutaImagen;
 	}
+	//Constructor para modificar herramienta
+	public Herramienta(int id_herramienta, String nombre, String marca,  String electrica, int potencia, double peso,
+			String anotaciones, String rutaImagen, int id_trabajador) {
+		this.id_herramienta = id_herramienta;
+		Nombre = nombre;
+		Electrica = electrica;
+		Marca = marca;
+		Peso = peso;
+		this.potencia = potencia;
+		this.anotaciones = anotaciones;
+		this.rutaImagen = rutaImagen;
+		if(id_trabajador == 0) {
+			this.id_trabajador=0;
+		}else {
+			this.id_trabajador = id_trabajador;
+		}
+	}
 
+	public Herramienta( String nombre, String marca, String electrica, double peso, String rutaImagen) {
+		Nombre = nombre;
+		Marca = marca;
+		Electrica = electrica;
+		this.potencia = 0;
+		Peso = peso;
+		this.anotaciones = "";
+		this.rutaImagen = rutaImagen;
+	}
+	//Constructor para la asignacion de herramientas
+	public Herramienta(int id_herramienta, String nombre, String marca, String electrica, String anotaciones, int id_trabajador) {
+		this.id_herramienta = id_herramienta;
+		Nombre = nombre;
+		Marca = marca;
+		this.Electrica = electrica;
+		this.anotaciones = anotaciones;
+		this.id_trabajador = id_trabajador;
+	}
+	
+	public Herramienta() {
+		
+	}
+	
+	public int getId_trabajador() {
+		return id_trabajador;
+	}
+	public void setId_trabajador(int id_trabajador) {
+		this.id_trabajador = id_trabajador;
+	}
+	public int getId_herramienta() {
+		return id_herramienta;
+	}
+	public void setId_herramienta(int id_herramienta) {
+		this.id_herramienta = id_herramienta;
+	}
 	public String getNombre() {
 		return Nombre;
 	}

@@ -13,6 +13,7 @@ package Vista;
 	
 	public class Login extends JFrame {
 		
+		//Componentes
 		private JPanel panel;
 		private ImageIcon boton = new ImageIcon("./imagenes/boton.png");
 		private JTextField inUser;
@@ -52,6 +53,7 @@ package Vista;
 
 		public Login() {
 			
+			//Propiedades de la ventana
 			setVisible(true);
 			setResizable(false);
 			Toolkit miPantalla = Toolkit.getDefaultToolkit();
@@ -80,8 +82,18 @@ package Vista;
 			entrar.setHorizontalTextPosition(SwingConstants.CENTER);
 			entrar.setForeground(Color.WHITE);
 			entrar.setFont(new Font("Arial", Font.BOLD, 12));
-			entrar.setBounds(406, 328, 119, 36);
+			entrar.setBounds(295, 328, 119, 36);
 			panel.add(entrar);
+			
+			JButton jefeNuevo = new JButton("NUEVO RESPONSABLE");
+			jefeNuevo.setIcon(new ImageIcon("./imagenes/boton.png"));
+			jefeNuevo.setVerticalTextPosition(SwingConstants.CENTER);
+			jefeNuevo.setHorizontalTextPosition(SwingConstants.CENTER);
+			jefeNuevo.setForeground(Color.WHITE);
+			jefeNuevo.setFont(new Font("Arial", Font.BOLD, 12));
+			jefeNuevo.setBounds(445, 328, 180, 36);
+			panel.add(jefeNuevo);
+			
 			
 			inUser = new JTextField();
 			inUser.setBounds(394, 137, 231, 29);
@@ -116,11 +128,11 @@ package Vista;
 			fondo.setBounds(0, 0, 944, 501);
 			panel.add(fondo);
 			
-			
 			//Acciones
 			entrar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
+						//Entrar
 						File users = new File("./txt/Usuarios");
 						Scanner lector = new Scanner(users);
 						lector.nextLine();
@@ -141,6 +153,34 @@ package Vista;
 								error.setText("Contraseña o usuario incorrecto, si no puede iniciar secion hable con un responsable");
 							}
 							
+						}
+					}catch (FileNotFoundException e1) {
+						e1.getMessage();
+					}
+				}
+			});
+			
+			jefeNuevo.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						//Añadir nuevo responsable
+						File users = new File("./txt/Usuarios");
+						Scanner lector = new Scanner(users);
+						lector.nextLine();
+						while(lector.hasNextLine()) {
+							String [] usuarios = lector.nextLine().split(" / ");
+							String nombre = usuarios[0];
+							String contrasena = usuarios[1];
+							char [] pass = getInPass().getPassword();
+							String password = new String(pass);
+							if(nombre.equals(getInUser().getText()) && contrasena.equals(password)) {
+								
+								NuevoResponsable responsable = new NuevoResponsable();
+								responsable.setVisible(true);
+								
+							}else {
+								error.setText("Introduce Usuario y contraseña correctamente para poder añadir un nuevo responsable");
+							}
 						}
 					}catch (FileNotFoundException e1) {
 						e1.getMessage();

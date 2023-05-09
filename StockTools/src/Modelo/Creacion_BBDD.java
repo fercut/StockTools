@@ -67,6 +67,16 @@ public class Creacion_BBDD {
                       "REFERENCES Trabajador(ID_TRABAJADOR))";
                 stmt.executeUpdate(sql); 
                 
+             //Crear una funcion para poder meter la ruta de imagenes
+                sql= "CREATE FUNCTION cargar_imagen(ruta VARCHAR(255)) "+
+                	 "RETURNS BLOB "+
+                	 "BEGIN "+
+                	 "DECLARE imagen BLOB; "+
+                	 "SET imagen = LOAD_FILE(ruta); "+
+                	 "RETURN imagen; "+
+                	 "END ";
+                stmt.executeUpdate(sql);
+                
              // Conectar a la base de datos
                 
                 JOptionPane.showMessageDialog(null, "Se ha conctado por primera vez y se ha creado una BBDD \n para poder usar la aplicacion correctamente");
@@ -74,21 +84,11 @@ public class Creacion_BBDD {
             
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Ha ocurrido un error al conectar con la base de datos");
-            e.printStackTrace();
-        } finally {
             
-            // Cerrar la conexion
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-                if (conexion != null) {
-                    conexion.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+            System.exit(0); // Para la ejecucion de la aplicacion ya que no puede interactuar con la BBDD
+            
+            e.printStackTrace();
+        } 
         
     }
     

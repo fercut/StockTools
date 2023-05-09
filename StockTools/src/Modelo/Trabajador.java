@@ -8,8 +8,17 @@ public class Trabajador {
 	private int id_trabajador;
 	private String Nombre;
 	private String Apellido1;
-	private static String Categoria;
+	private String Categoria;
 	private ArrayList<Herramienta> herramientasAsignadas;
+	public Trabajador(String nombre, String apellido1, String categoria) {
+		Nombre = nombre;
+		Apellido1 = apellido1;
+		Categoria = categoria;
+	}
+	public Trabajador() {
+		
+	}
+	
 	public Trabajador(int id_trabajador, String nombre, String apellido1, String categoria) {
 		this.id_trabajador = id_trabajador;
 		Nombre = nombre;
@@ -34,7 +43,7 @@ public class Trabajador {
 	public void setApellido1(String apellido1) {
 		Apellido1 = apellido1;
 	}
-	public static String getCategoria() {
+	public String getCategoria() {
 		return Categoria;
 	}
 	public void setCategoria(String categoria) {

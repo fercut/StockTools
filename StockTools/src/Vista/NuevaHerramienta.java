@@ -3,11 +3,15 @@ package Vista;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.Console;
+
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import Controlador.*;
 import Modelo.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class NuevaHerramienta extends JFrame {
 	
@@ -24,20 +28,29 @@ public class NuevaHerramienta extends JFrame {
 	private JCheckBox checkNo = new JCheckBox("");
 	
 	//Creacion del objeto que vamos a INSERTAR en la BBDD (si es correcto)
-	public Herramienta InsertTools() {
+	public Herramienta crearHerramientaVista() {
 		
 		String nombre = inName.getText();
 		String marca = inBrand.getText();
-		int potencia = Integer.parseInt(inPower.getText());
+		int potencia;
 		double peso = Double.parseDouble(inWeigth.getText());
 		String anotacion = inAnnotation.getText();
 		String foto = inImage.getText();
 		String electrica;
+		
 		if(checkYes.isSelected()) {
 			electrica = "Si";
 		}else {
 			electrica = "No";
 		}
+		
+		if(inPower.getText().equals("")) {
+			potencia = 0;
+		}else {
+			potencia = Integer.parseInt(inPower.getText());
+		}
+		
+		
 		Herramienta tools = new Herramienta(nombre, marca, electrica, potencia, peso, anotacion, foto);
 		return tools;
 	}
@@ -141,6 +154,7 @@ public class NuevaHerramienta extends JFrame {
 	//Creacion de la pare visual.
 	public NuevaHerramienta() {
 		
+		//Propiedades de ventana
 		setVisible(true);
 		setResizable(false);
 		Toolkit miPantalla = Toolkit.getDefaultToolkit();
@@ -165,12 +179,10 @@ public class NuevaHerramienta extends JFrame {
         panelImagen.setBounds(0, 0, getWidth(), getHeight());
         panelImagen.setBackground(Color.WHITE);
         panelImagen.setLayout(null);
-
-        // Añadir panel de la imagen al panel principal
         panel.add(panelImagen);
 	
 		
-		//Formulario
+		//Componentes
 		JLabel Name = new JLabel("Nombre");
 		Name.setForeground(new Color(255, 255, 255));
 		Name.setBounds(287, 80, 45, 20);
@@ -214,6 +226,7 @@ public class NuevaHerramienta extends JFrame {
 		imagen.setFont(new Font("Arial", Font.BOLD, 12));
 		
 		checkYes.setBounds(392, 158, 21, 22);
+		checkYes.setSelected(true);
 		
 		checkNo.setBounds(457, 157, 21, 23);
 		
@@ -266,17 +279,27 @@ public class NuevaHerramienta extends JFrame {
         panelImagen.add(inAnnotation);
         panelImagen.add(inImage);
         
-        //Fondo
+        JLabel si = new JLabel("Si");
+        si.setForeground(new Color(255, 255, 255));
+        si.setBounds(419, 163, 21, 14);
+        panelImagen.add(si);
+        
+        JLabel no = new JLabel("No");
+        no.setForeground(Color.WHITE);
+        no.setBounds(484, 163, 21, 14);
+        panelImagen.add(no);
+        
         JLabel fondo = new JLabel("");
         fondo.setIcon(new ImageIcon("./imagenes/fondo.jpg"));
-        fondo.setBounds(0, 0, 950, 508);
+        fondo.setBounds(0, 0, 950, 509);
         panelImagen.add(fondo);
         setContentPane(panel);
         
         revalidate();
 		repaint();
 		
-		//Acciones 
+		//Acciones y comprobacion de campos del formulario
+		
 		checkYes.addItemListener(new ItemListener(){
 			public void itemStateChanged(ItemEvent e) {
 				if(checkYes.isSelected()) {
@@ -293,65 +316,64 @@ public class NuevaHerramienta extends JFrame {
 			}
 		});
 		
-	
+		inName.addFocusListener(new FocusAdapter() {
+			public void focusLost(FocusEvent e) {
+				if(inName.getText().length() > 20){
+					inName.setText("");
+					JOptionPane.showMessageDialog(null,"El nombre de la herramienta solo puede \n tener hasta 20 caracteres");
+				}
+			}
+		});
+		inBrand.addFocusListener(new FocusAdapter() {
+			public void focusLost(FocusEvent e) {
+				if(inBrand.getText().length() > 20) {
+					inBrand.setText("");
+					JOptionPane.showMessageDialog(null,"La Marca de la herramienta solo puede \n tener hasta 20 caracteres");
+				}
+			}
+		});
+		
+		inPower.addFocusListener(new FocusAdapter() {
+			public void focusLost(FocusEvent e) {
+				try {
+					if(inPower.getText().length()>0) {
+						 int value = Integer.parseInt(inPower.getText());
+					}
+				} catch (NumberFormatException e1) {
+			    	  inPower.setText("");
+			    	  JOptionPane.showMessageDialog(null,"La potencia debe ser un numero \n entero sin puntos ni comas ni letras");
+			      }
+			}
+		});
+		
+		inWeigth.addFocusListener(new FocusAdapter() {
+			public void focusLost(FocusEvent e) {
+				try {
+					if(inWeigth.getText().length()>0) {
+						 double value = Double.parseDouble(inWeigth.getText());
+					}
+				} catch (NumberFormatException e1) {
+					inWeigth.setText("");
+			    	  JOptionPane.showMessageDialog(null,"La parte decimal del peso debe estar separada \n  por un punto y no debe de tener letras");
+			      }
+			}
+		});
+		inAnnotation.addFocusListener(new FocusAdapter() {
+			public void focusLost(FocusEvent e) {
+				if(inAnnotation.getText().length()>100) {
+					inAnnotation.setText("");
+					JOptionPane.showMessageDialog(null,"La anotacion no puede tener mas de 100 caracteres");
+				}
+			}
+		});
+		
+		
 		newTool.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Evalua toda las casuisticas posibles para que el formulario se rellene con datos validos para la BBDD
-				boolean finalizado = true;
-				boolean valuePower = true;
-				boolean valueWeigth = true;
-				
-				while(finalizado){
-					if(inName.getText().length()>20) {
-						JOptionPane.showMessageDialog(null,"El nombre de la herramienta solo puede \n tener hasta 20 caracteres");
-						inName.setText("");
-						newTool.addActionListener(null);
-						
-						
-					}else if(inBrand.getText().length()>20) {
-						inBrand.setText("");;
-						JOptionPane.showMessageDialog(null,"La marca de la herramienta solo puede \n tener hasta 20 caracteres");
-						
-					}else if(!(checkYes.isSelected() || checkNo.isSelected())) {
-						checkNo.setSelected(true);
-						JOptionPane.showMessageDialog(null,"Por favor marque si es electrica o no");
-						newTool.addActionListener(null);
-					}else if(valuePower) {
-						try {
-							
-							if(inPower.getText().length()>0 && checkYes.isSelected()) {
-								 int value = Integer.parseInt(inPower.getText());
-					        	 valuePower = false;
-					         }
-					      } catch (NumberFormatException e1) {
-					    	  new NuevaHerramienta();
-					    	  JOptionPane.showMessageDialog(null,"La potencia debe ser un numero \n entero sin puntos ni comas ni letras");
-					    	  valuePower = true;
-					      }
-						
-					}else if(valueWeigth) {
-						try {
-						   
-						   if(inWeigth.getText().length()>0) {
-							   double value = Double.parseDouble(inWeigth.getText());
-							   valueWeigth = false;
-						   }
-					      } catch (NumberFormatException e2) {
-					    	  inWeigth.setText("");
-					    	  JOptionPane.showMessageDialog(null,"La parte decimal del peso debe \n estar separada por un punto");
-					    	  valueWeigth = true;
-					      }
-					}else if(inAnnotation.getText().length()>100) {
-						inAnnotation.setText("");
-						JOptionPane.showMessageDialog(null,"La anotacion no puede tener mas de 100 caracteres");
-					
-					}else {
-						finalizado = false;
-					}
-				}
-				System.out.println("he salido");
-				revalidate();
-				repaint();
+				Herramienta tools = crearHerramientaVista();
+				NuevaHerramientaControlador nueva = new NuevaHerramientaControlador();
+				nueva.nuevaHerramientaControlador(tools);
+				dispose();
 			}
 		});
 		

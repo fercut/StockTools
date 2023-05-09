@@ -1,7 +1,7 @@
-INDEX VERSION 1.132+C:\Users\fermi\OneDrive\Escritorio\Proyectos\Stock tools\.metadata\.plugins\org.eclipse.jdt.core
-3379036643.index
-1865797976.index
-2196521743.index
+INDEX VERSION 1.132+C:\Users\Usuario\Desktop\Proyectos\Stock tools\.metadata\.plugins\org.eclipse.jdt.core
 1543199802.index
-3413725848.index
+1865797976.index
+3379036643.index
+2196521743.index
 3673181189.index
+3413725848.index
