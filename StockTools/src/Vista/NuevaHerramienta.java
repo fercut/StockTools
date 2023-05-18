@@ -3,8 +3,8 @@ package Vista;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.io.Console;
-
+import java.io.*;
+import java.util.*;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -26,6 +26,7 @@ public class NuevaHerramienta extends JFrame {
 	private JTextField inImage;
 	private JCheckBox checkYes = new JCheckBox("");
 	private JCheckBox checkNo = new JCheckBox("");
+	private String rutaImagen = "";
 	
 	//Creacion del objeto que vamos a INSERTAR en la BBDD (si es correcto)
 	public Herramienta crearHerramientaVista() {
@@ -289,15 +290,21 @@ public class NuevaHerramienta extends JFrame {
         no.setBounds(484, 163, 21, 14);
         panelImagen.add(no);
         
+        JButton examine = new JButton("Examinar");
+        examine.setForeground(new Color(255, 255, 255));
+        examine.setIcon(new ImageIcon("./imagenes/boton.png"));
+        examine.setVerticalTextPosition(SwingConstants.CENTER);
+        examine.setHorizontalTextPosition(SwingConstants.CENTER);
+        examine.setFont(new Font("Arial", Font.BOLD, 11));
+        examine.setBounds(641, 319, 89, 23);
+        panelImagen.add(examine);
+        setContentPane(panel);
+        
         JLabel fondo = new JLabel("");
         fondo.setIcon(new ImageIcon("./imagenes/fondo.jpg"));
         fondo.setBounds(0, 0, 950, 509);
         panelImagen.add(fondo);
-        setContentPane(panel);
         
-        revalidate();
-		repaint();
-		
 		//Acciones y comprobacion de campos del formulario
 		
 		checkYes.addItemListener(new ItemListener(){
@@ -376,6 +383,14 @@ public class NuevaHerramienta extends JFrame {
 				dispose();
 			}
 		});
+		
+		examine.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		BuscarImagen ruta = new BuscarImagen();
+        		inImage.setText(ruta.buscarImagen());
+        	}
+        });
 		
 		revalidate();
 		repaint();

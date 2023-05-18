@@ -179,6 +179,13 @@ public Trabajador modificarTrabajador(){
 				public void actionPerformed(ActionEvent e) {
 					if (checkBox.isSelected()) {
 						seleccionado = trabajador;
+						inName.setText(seleccionado.getNombre());
+						inLastName.setText(seleccionado.getApellido1());
+						if(seleccionado.getCategoria().equals("Oficial")) {
+							checkOficial.setSelected(true);
+						}else {
+							checkTecnic.setSelected(true);
+						}
 					}
 				}
 			});

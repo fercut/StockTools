@@ -24,6 +24,10 @@ public class NuevaHerramientaModelo {
 		double peso = herramienta.getPeso();
 		String anotacion = herramienta.getAnotaciones();
 		String imagen = herramienta.getRutaImagen();
+		
+		if(herramienta.getRutaImagen()==null) {
+			imagen = "";
+		}
 		Connection conexion;
 		
 		try {

@@ -111,28 +111,6 @@ public Herramienta modificarHerramienta() {
 			modificarHerramienta.setBounds(374, 447, 182, 43);
 			panel.add(modificarHerramienta);
 			
-			//Insercion de herramientas de forma dinamica
-			JPanel checkHerramientas = new JPanel();
-			checkHerramientas.setLayout(new BoxLayout (checkHerramientas, BoxLayout.Y_AXIS));
-			
-			for(Herramienta herramienta : herramientas) {
-				
-				JCheckBox checkBox = new JCheckBox(herramienta.getNombre() + ", " + herramienta.getMarca() +
-						", " + herramienta.getPotencia() + "W, " + herramienta.getPeso() + "Kg, " + herramienta.getAnotaciones());
-				checkBox.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						if(checkBox.isSelected()) {
-							seleccionada = herramienta;
-						}
-					}
-				});
-				checkHerramientas.add(checkBox);
-			}
-			
-			JScrollPane checkTools = new JScrollPane(checkHerramientas);
-			checkTools.setBounds(28, 89, 293, 296);
-			panel.add(checkTools);
-			
 			JLabel aviso = new JLabel("Por favor seleccione solo una opcion ");
 			aviso.setFont(new Font("Arial", Font.BOLD, 12));
 			aviso.setForeground(new Color(255, 255, 255));
@@ -243,6 +221,47 @@ public Herramienta modificarHerramienta() {
 	        datos.setBounds(442, 35, 340, 43);
 	        panel.add(datos);
 	        
+	    	//Insercion de herramientas de forma dinamica
+			JPanel checkHerramientas = new JPanel();
+			checkHerramientas.setLayout(new BoxLayout (checkHerramientas, BoxLayout.Y_AXIS));
+			
+			for(Herramienta herramienta : herramientas) {
+				
+				JCheckBox checkBox = new JCheckBox(herramienta.getNombre() + ", " + herramienta.getMarca() +
+						", " + herramienta.getPotencia() + "W, " + herramienta.getPeso() + "Kg, " + herramienta.getAnotaciones());
+				checkBox.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if(checkBox.isSelected()) {
+							seleccionada = herramienta;
+							inName.setText(seleccionada.getNombre());
+							inBrand.setText(seleccionada.getMarca());
+							if(seleccionada.getElectrica().equals("Si")) {
+								checkYes.setSelected(true);
+							}else {
+								checkNo.setSelected(true);
+							}
+							inPower.setText(String.valueOf(seleccionada.getPotencia()));
+							inWeigth.setText(String.valueOf(seleccionada.getPeso()));
+							inAnnotation.setText(seleccionada.getAnotaciones());
+						}
+					}
+				});
+				checkHerramientas.add(checkBox);
+			}
+			
+			JScrollPane checkTools = new JScrollPane(checkHerramientas);
+			checkTools.setBounds(28, 89, 293, 296);
+			panel.add(checkTools);
+			
+			JButton examine = new JButton("Examinar");
+	        examine.setForeground(new Color(255, 255, 255));
+	        examine.setIcon(new ImageIcon("./imagenes/boton.png"));
+	        examine.setVerticalTextPosition(SwingConstants.CENTER);
+	        examine.setHorizontalTextPosition(SwingConstants.CENTER);
+	        examine.setFont(new Font("Arial", Font.BOLD, 11));
+	        examine.setBounds(810, 351, 89, 23);
+	        panel.add(examine);
+	        
 	        JLabel fondo = new JLabel("");
 	        fondo.setIcon(new ImageIcon("./imagenes/fondo.jpg"));
 	        fondo.setBounds(0, 0, 944, 501);
@@ -322,6 +341,14 @@ public Herramienta modificarHerramienta() {
 					Herramienta modificada = modificarHerramienta();
 					modificar.modificarHerramientaControlador(seleccionada, modificada);
 					dispose();
+				}
+			});
+			
+			examine.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					BuscarImagen ruta = new BuscarImagen();
+					inImage.setText(ruta.buscarImagen());
+					
 				}
 			});
 	        
